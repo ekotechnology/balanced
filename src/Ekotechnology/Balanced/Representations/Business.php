@@ -1,5 +1,5 @@
 <?php namespace Ekotechnology\Balanced\Representations;
 
-class Customer {
+class Business {
 	use RepresentationTrait;
 }

@@ -1,5 +1,5 @@
 <?php namespace Ekotechnology\Balanced\Representations;
 
-class Merchant {
+class Buyer {
 	use RepresentationTrait;
 }

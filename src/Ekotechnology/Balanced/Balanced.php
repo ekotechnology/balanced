@@ -3,7 +3,8 @@
 use \Guzzle\Http\Client;
 use Ekotechnology\Balanced\Subscribers\BasicAuth, Ekotechnology\Balanced\Subscribers\Errors;
 use Ekotechnology\Balanced\Representations\Account, Ekotechnology\Balanced\Representations\Card, Ekotechnology\Balanced\Representations\Bank;
-use Ekotechnology\Balanced\Representations\Customer, Ekotechnology\Balanced\Representations\Merchant;
+use Ekotechnology\Balanced\Representations\Buyer, Ekotechnology\Balanced\Representations\Merchant, Ekotechnology\Balanced\Representations\Business;
+use Ekotechnology\Balanced\Representations\Person;
 use Ekotechnology\Balanced\Exceptions\FactoryTypeUnknown;
 
 class Balanced {
@@ -12,10 +13,14 @@ class Balanced {
 	private $config = array();
 	var $client;
 
+	/**
+	 * Fire up a Guzzle Client
+	 * @param array $config
+	 */
 	function __construct($config=array()) {
 		if (!empty($config)) {
 			$this->client = new Client("https://api.balancedpayments.com/v1", array(
-				'MARKETPLACE_ID' => $config['MARKETPLACE_ID']
+					'MARKETPLACE_ID' => $config['MARKETPLACE_ID']
 				)
 			);
 			$this->client->setUserAgent("EKO Technology Balanced PHP Client v" . self::VERSION);
@@ -24,10 +29,20 @@ class Balanced {
 		}
 	}
 
+	/**
+	 * Initialize or reinitialize the class
+	 * @param  array  $config
+	 * @return void
+	 */
 	function init($config = array()) {
 		$this->__construct($config);
 	}
 
+	/**
+	 * Factory method generates different object representations
+	 * @param  string $type Class type
+	 * @return mixed
+	 */
 	function factory($type) {
 		switch (strtolower($type)) {
 			case 'account':
@@ -36,14 +51,17 @@ class Balanced {
 			case 'bank':
 				return new Bank($this);
 			break;
+			case 'business':
+				return new Business($this);
+			break;
+			case 'buyer':
+				return new Buyer($this);
+			break;
 			case 'card':
 				return new Card($this);
 			break;
-			case 'customer':
-				return new Customer($this);
-			break;
-			case 'merchant':
-				return new Merchant($this);
+			case 'person':
+				return new Person($this);
 			break;
 			default:
 				throw new FactoryTypeUnknown("$type is not a known factory type.");
