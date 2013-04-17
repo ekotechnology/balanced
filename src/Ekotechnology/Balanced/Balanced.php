@@ -19,6 +19,7 @@ class Balanced {
 	 */
 	function __construct($config=array()) {
 		if (!empty($config)) {
+			$this->config = $config;
 			$this->client = new Client("https://api.balancedpayments.com/v1", array(
 					'MARKETPLACE_ID' => $config['MARKETPLACE_ID']
 				)
@@ -66,5 +67,12 @@ class Balanced {
 			default:
 				throw new FactoryTypeUnknown("$type is not a known factory type.");
 		}
+	}
+
+	function javascript() {
+		$output = '<script type="text/javascript" src="https://js.balancedpayments.com/v1/balanced.js"></script>';
+		$output .= "\n";
+		$output .= '<script type="text/javascript">balanced.init("/v1/marketplaces/' . $this->config['MARKETPLACE_ID'] . '");</script>';
+		return $output;
 	}
 }
