@@ -1,0 +1,6 @@
+balanced.sublime-project
+balanced.sublime-workspace
+/vendor
+composer.phar
+composer.lock
+.DS_Store
