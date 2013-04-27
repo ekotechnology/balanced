@@ -9,7 +9,7 @@ use Ekotechnology\Balanced\Exceptions\FactoryTypeUnknown;
 
 class Balanced {
 
-	const VERSION = "0.2.0";
+	const VERSION = "0.2.2";
 	private $config = array();
 	var $client;
 
