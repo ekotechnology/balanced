@@ -1,5 +1,5 @@
 <?php namespace Ekotechnology\Balanced\Requests\Traits;
-use namespace Ekotechnology\Balanced\Exceptions\InvalidArgument;
+namespace Ekotechnology\Balanced\Exceptions\InvalidArgument;
 
 trait GetTrait {
 
