@@ -91,7 +91,7 @@ trait RepresentationTrait {
 	function __call($method, $args) {
 		if (!method_exists($this, $method)) {
 			if (method_exists($this->actions, $method)) {
-				return call_user_method_array($method, $this->actions, $args);
+				return call_user_func_array(array($this->actions, $method), $args);
 			}
 			else {
 				throw new UnrecognizedMethod(__CLASS__ . '::' . $method . ' is unknown.  Please check the docs.');
