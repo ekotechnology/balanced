@@ -102,6 +102,7 @@ class Account {
 			$this->params = array_merge($this->params, $customer->getItems());
 			$request = $this->representation->instance->client->post('marketplaces/{MARKETPLACE_ID}/accounts', null, $this->params);
 			$response = $request->send();
+			$this->params = [];
 			$this->representation->fill($response->json());
 			return $this->representation;
 		}
