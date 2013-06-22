@@ -56,7 +56,7 @@ class Account {
 			$srcType = $this->objectType($customer);
 			switch ($srcType) {
 				case 'Business':
-					$required = ['name', 'phone_number', 'tax_id', 'dob', 'street_address', 'postal_code', 'person', 'person.name', 'person.dob', 'person.street_address', 'person.postal_code', 'person.tax_id'];
+					$required = ['name', 'phone_number', 'tax_id', 'street_address', 'postal_code', 'person', 'person.name', 'person.dob', 'person.street_address', 'person.postal_code', 'person.tax_id'];
 				break;
 
 				case 'Person':
