@@ -9,7 +9,7 @@ use Ekotechnology\Balanced\Exceptions\FactoryTypeUnknown;
 
 class Balanced {
 
-	const VERSION = "0.2.6";
+	const VERSION = "0.2.7";
 	private $config = array();
 	var $client;
 
@@ -70,9 +70,15 @@ class Balanced {
 	}
 
 	function javascript() {
+		if (!strstr($this->config['MARKETPLACE_ID'], 'marketplaces')) {
+			$marketplace = '/v1/marketplaces/' . $this->config['MARKETPLACE_ID'];
+		}
+		else {
+			$marketplace = $this->config['MARKETPLACE_ID'];
+		}
 		$output = '<script type="text/javascript" src="https://js.balancedpayments.com/v1/balanced.js"></script>';
 		$output .= "\n";
-		$output .= '<script type="text/javascript">balanced.init("/v1/marketplaces/' . $this->config['MARKETPLACE_ID'] . '");</script>';
+		$output .= '<script type="text/javascript">balanced.init("' . $marketplace . '");</script>';
 		return $output;
 	}
 }
